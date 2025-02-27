@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食影集 - 美食图片分享</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 标题栏 -->
+    <header>
+        <div class="header-content">
+            <h1>食影集</h1>
+            <div class="header-right">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li id="search-trigger"><a href="#">搜索</a></li>
+                        <li id="my-profile-trigger"><a href="#">我的</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="search-box" class="search-box">
+                <input type="text" id="search-input" placeholder="搜索">
+                <button id="search-btn">搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 图片展示区 -->
+    <main class="gallery">
+        <div class="photo" data-tags="饮品" data-description="清凉解渴薄荷柠檬茶 饮料">
+            <img src="pictures/drink.jpg" alt="饮料">
+        </div>
+        <div class="photo" data-tags="健康" data-description="维生素 营养成分">
+            <img src="pictures/nutrition1.jpg" alt="维生素作用来源">
+        </div>
+        <div class="photo" data-tags="西餐" data-description="牛肉双层汉堡">
+            <img src="pictures/burger.jpg" alt="汉堡">
+        </div>
+        <div class="photo" data-tags="健康" data-description="锌 营养成分">
+            <img src="pictures/nutrition3.jpg" alt="补锌">
+        </div>
+        <div class="photo" data-tags="甜点 " data-description="双层巧克力水果饼干甜品蛋糕">
+            <img src="pictures/dessert2.jpg" alt="甜品2">
+        </div>
+        <div class="photo" data-tags="西餐" data-description="三文鱼鸡蛋炒饭">
+            <img src="pictures/fried rice.jpg" alt="炒饭">
+        </div>
+        <div class="photo" data-tags="教学 健康" data-description="减脂沙拉">
+            <img src="pictures/recipe2.webp" alt="健康减脂">
+        </div>
+        <div class="photo" data-tags="中餐" data-description="日式乌冬面">
+            <img src="pictures/noodles.jpg" alt="乌冬面">
+        </div>
+        <div class="photo" data-tags="西餐" data-description="薄底牛肉沫披萨">
+            <img src="pictures/pizza.jpg" alt="披萨">
+        </div>
+        <div class="photo" data-tags="中餐" data-description="面条">
+            <img src="pictures/noodles2.jpg" alt="面2">
+        </div>
+        <div class="photo" data-tags="教学 中餐" data-description="柠檬鸡爪">
+            <img src="pictures/recipe6.webp" alt="柠檬鸡爪">
+        </div>
+        <div class="photo" data-tags="西餐 健康" data-description="健康减脂沙拉，牛油果鸡胸肉">
+            <img src="pictures/salad.jpg" alt="沙拉">
+        </div>
+        <div class="photo" data-tags="饮品" data-description="冰拿铁咖啡">
+            <img src="pictures/coffe.webp" alt="咖啡">
+        </div>
+        <div class="photo" data-tags="健康" data-description="血清素 营养成分">
+            <img src="pictures/nutrition2.jpg" alt="血清素">
+        </div>
+        <div class="photo" data-tags="中餐" data-description="港式蒸饺">
+            <img src="pictures/dumpling.webp" alt="中式点心">
+        </div>
+        <div class="photo" data-tags="教学 健康" data-description="减脂健康沙拉 营养成分">
+            <img src="pictures/healthy diet.jpg" alt="211餐盘法">
+        </div>
+        <div class="photo" data-tags="中餐" data-description="火锅牛肉">
+            <img src="pictures/hotpot.webp" alt="火锅">
+        </div>
+        <div class="photo" data-tags="中餐" data-description="馄饨">
+            <img src="pictures/huntun.webp" alt="馄饨">
+        </div>
+        <div class="photo" data-tags="教学 中餐" data-description="宫保鸡丁">
+            <img src="pictures/recipe4.webp" alt="宫保鸡丁">
+        </div>
+        <div class="photo" data-tags="教学 中餐" data-description="咖喱鸡肉饭">
+            <img src="pictures/recipe3.webp" alt="咖喱鸡肉饭">
+        </div>
+        <div class="photo" data-tags="西餐 健康" data-description="牛排">
+            <img src="pictures/steak.webp" alt="牛排">
+        </div>
+        <div class="photo" data-tags="甜点" data-description="柠檬起司蛋糕">
+            <img src="pictures/cake.jpg" alt="蛋糕">
+        </div>
+        <div class="photo" data-tags="教学 健康 饮品" data-description="减脂健康蔬菜水果燕麦奶昔">
+            <img src="pictures/milkshake.jpg" alt="燕麦奶昔">
+        </div>
+        <div class="photo" data-tags="教学 健康" data-description="减脂健康野餐 营养成分">
+            <img src="pictures/nutrition.webp" alt="野餐食物大全">
+        </div>
+        <div class="photo" data-tags="教学 中餐" data-description="番茄炖牛腩">
+            <img src="pictures/recipe1.webp" alt="番茄炖牛腩">
+        </div>
+        <div class="photo" data-tags="教学 健康 饮品" data-description="牛油果橄榄油柠檬减脂饮料">
+            <img src="pictures/recipe8.jpg" alt="牛油果饮料">
+        </div>
+        <div class="photo" data-tags="中餐" data-description="酸菜鱼">
+            <img src="pictures/suancaiyu.webp" alt="酸菜鱼">
+        </div>
+        <div class="photo" data-tags="健康 中餐" data-description="健康牛油果三文鱼减脂寿司">
+            <img src="pictures/sushi.webp" alt="寿司">
+        </div>
+        <div class="photo" data-tags="中餐" data-description="汤圆鱼">
+            <img src="pictures/tangyuan.webp" alt="汤圆">
+        </div>
+        <div class="photo" data-tags="健康 饮品" data-description="减脂燕麦酸奶">
+            <img src="pictures/yogurt.jpg" alt="燕麦酸奶">
+        </div>
+    </main>
+
+    <!-- 底部标签分类 -->
+    <div class="tag-filter">
+        <label><input type="checkbox" value="教学"> 教学</label>
+        <label><input type="checkbox" value="健康"> 健康</label>
+        <label><input type="checkbox" value="西餐"> 西餐</label>
+        <label><input type="checkbox" value="中餐"> 中餐</label>
+        <label><input type="checkbox" value="甜点"> 甜点</label>
+        <label><input type="checkbox" value="饮品"> 饮品</label>
+    </div>
+
+    <!-- 图片放大模态框 -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-img" src="" alt="大图">
+        <button id="favorite-btn" class="favorite-btn">❤ 收藏</button>
+    </div>
+
+    <!-- 登录模态框 -->
+    <div id="login-modal" class="login-modal">
+        <div class="login-content">
+            <h2>登录</h2>
+            <input type="text" id="username" placeholder="用户名">
+            <input type="password" id="password" placeholder="密码">
+            <button id="login-btn">登录</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

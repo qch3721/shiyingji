@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的资料 - 食影集</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- 标题栏 -->
+    <header>
+        <div class="header-content">
+            <h1>食影集</h1>
+            <div class="header-right">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="myprofile.html">我的</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="search-box" class="search-box">
+                <input type="text" id="search-input" placeholder="搜索">
+                <button id="search-btn">搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="pictures/profile photo.webp" alt="个人头像">
+            <h2>用户名:qiancheng</h2>
+        </div>
+        <div class="profile-info">
+            <p><strong>邮箱:</strong> qch3721@hotmail.com</p>
+            <p><strong>加入时间:</strong> 2025年1月</p>
+            <p><strong>美食偏好:</strong> 中餐、甜点</p>
+        </div>
+        <h3>我的收藏</h3>
+        <div class="profile-content">
+            <div id="favorite-gallery" class="gallery">
+                <!-- 收藏的图片将动态添加到这里 -->
+            </div>
+        </div>
+    </div>
+    
+        <!-- 图片放大模态框 -->
+        <div id="lightbox" class="lightbox">
+            <span class="close">&times;</span>
+            <img class="lightbox-img" src="" alt="大图">
+        </div>
+  
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const gallery = document.getElementById("favorite-gallery");
+            const username = localStorage.getItem("currentUser");
+            
+            function loadFavorites() {
+                gallery.innerHTML = "";
+                const favorites = JSON.parse(localStorage.getItem(`favorites_${username}`)) || [];
+                
+                favorites.forEach(item => {
+                    const div = document.createElement("div");
+                    div.className = "photo";
+                    div.innerHTML = `
+                        <img src="${item.src}" alt="${item.alt}">
+                        <button class="remove-btn">移除</button>
+                    `;
+                    
+                    div.querySelector(".remove-btn").addEventListener("click", function() {
+                        const newFavorites = favorites.filter(fav => fav.src !== item.src);
+                        localStorage.setItem(`favorites_${username}`, JSON.stringify(newFavorites));
+                        loadFavorites();
+                    });
+                    
+                    gallery.appendChild(div);
+                });
+            }
+            
+            if (localStorage.getItem("isLoggedIn") === "true") {
+                loadFavorites();
+            } else {
+                window.location.href = "index.html";
+            }
+        });
+        </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
