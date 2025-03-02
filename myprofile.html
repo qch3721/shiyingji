@@ -21,10 +21,6 @@
                     </ul>
                 </nav>
             </div>
-            <div id="search-box" class="search-box">
-                <input type="text" id="search-input" placeholder="搜索">
-                <button id="search-btn">搜索</button>
-            </div>
         </div>
     </header>
 
@@ -45,22 +41,46 @@
             </div>
         </div>
     </div>
-    
-        <!-- 图片放大模态框 -->
-        <div id="lightbox" class="lightbox">
-            <span class="close">&times;</span>
-            <img class="lightbox-img" src="" alt="大图">
+
+    <!-- 图片放大模态框 -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-img" src="" alt="大图">
+        <div class="lightbox-buttons">
+            <button id="favorite-btn" class="favorite-btn">❤ 收藏</button>
+            <button id="share-btn" class="share-btn">分享</button>
+            <button id="download-btn" class="download-btn">下载</button>
         </div>
-  
+    </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        // 判断用户是否已登录
+        function isLoggedIn() {
+            return localStorage.getItem('isLoggedIn') === 'true';
+        }
+
+        // 获取用户的收藏列表
+        function getFavorites() {
+            const username = localStorage.getItem("currentUser");
+            return JSON.parse(localStorage.getItem(`favorites_${username}`)) || [];
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
             const gallery = document.getElementById("favorite-gallery");
             const username = localStorage.getItem("currentUser");
-            
+            const lightbox = document.getElementById("lightbox");
+            const lightboxImg = document.querySelector(".lightbox-img");
+            const closeBtn = document.querySelector(".close");
+            const favoriteBtn = document.getElementById("favorite-btn");
+            const shareBtn = document.getElementById("share-btn");
+            const downloadBtn = document.getElementById("download-btn");
+            let currentPhotoData = null;
+
+            // 加载收藏的图片
             function loadFavorites() {
                 gallery.innerHTML = "";
-                const favorites = JSON.parse(localStorage.getItem(`favorites_${username}`)) || [];
-                
+                const favorites = getFavorites();
+
                 favorites.forEach(item => {
                     const div = document.createElement("div");
                     div.className = "photo";
@@ -68,26 +88,98 @@
                         <img src="${item.src}" alt="${item.alt}">
                         <button class="remove-btn">移除</button>
                     `;
-                    
-                    div.querySelector(".remove-btn").addEventListener("click", function() {
+
+                    // 为移除按钮添加点击事件
+                    div.querySelector(".remove-btn").addEventListener("click", function () {
                         const newFavorites = favorites.filter(fav => fav.src !== item.src);
                         localStorage.setItem(`favorites_${username}`, JSON.stringify(newFavorites));
                         loadFavorites();
                     });
-                    
+
+                    // 为图片添加点击事件，打开灯箱
+                    div.querySelector("img").addEventListener("click", function () {
+                        lightbox.style.display = "flex";
+                        lightboxImg.src = this.src;
+                        currentPhotoData = {
+                            src: this.src,
+                            alt: this.alt
+                        };
+                        updateFavoriteButton();
+                        updateButtonVisibility();
+                    });
+
                     gallery.appendChild(div);
                 });
             }
-            
-            if (localStorage.getItem("isLoggedIn") === "true") {
+
+            // 关闭灯箱
+            closeBtn.addEventListener("click", function () {
+                lightbox.style.display = "none";
+            });
+
+            lightbox.addEventListener("click", function (e) {
+                if (e.target === lightbox) {
+                    lightbox.style.display = "none";
+                }
+            });
+
+            // 更新收藏按钮状态
+            function updateFavoriteButton() {
+                const favorites = getFavorites();
+                const isFavorited = favorites.some(item => item.src === currentPhotoData.src);
+
+                favoriteBtn.style.display = "block";
+                favoriteBtn.classList.toggle("added", isFavorited);
+                favoriteBtn.textContent = isFavorited ? "✔ 已收藏" : "❤ 收藏";
+            }
+
+            // 处理收藏按钮点击事件
+            favoriteBtn.addEventListener("click", function () {
+                const username = localStorage.getItem("currentUser");
+                const favorites = getFavorites();
+                const index = favorites.findIndex(item => item.src === currentPhotoData.src);
+
+                if (index === -1) {
+                    // 添加到收藏
+                    favorites.push(currentPhotoData);
+                } else {
+                    // 从收藏中移除
+                    favorites.splice(index, 1);
+                }
+
+                localStorage.setItem(`favorites_${username}`, JSON.stringify(favorites));
+                updateFavoriteButton();
+            });
+
+            // 分享按钮点击事件
+            shareBtn.addEventListener("click", function () {
+        navigator.clipboard.writeText(currentPhotoData.src)
+            .then(() => {
+                alert('图片链接已复制到剪贴板！');
+            })
+            .catch(err => {
+                console.error('复制失败', err);
+                alert('复制失败，请手动复制链接。');
+            });
+    });
+
+            // 下载按钮点击事件
+            downloadBtn.addEventListener("click", function () {
+        const link = document.createElement('a');
+        link.href = currentPhotoData.src;
+        link.download = `${currentPhotoData.alt || 'image'}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
+
+            if (isLoggedIn()) {
                 loadFavorites();
             } else {
                 window.location.href = "index.html";
             }
         });
-        </script>
-
-    <script src="script.js"></script>
+    </script>
 </body>
-
 </html>

@@ -189,11 +189,13 @@ nav ul li a:hover {
     flex-direction: column;
     z-index: 300;
 }
+
 .login-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
 }
+
 .login-content input {
     width: 200px;
     padding: 10px;
@@ -201,6 +203,7 @@ nav ul li a:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 .login-content button {
     padding: 10px 20px;
     background-color: #000000;
@@ -209,14 +212,21 @@ nav ul li a:hover {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .login-content button:hover {
     background-color: #333333;
 }
 
+/* 灯箱按钮容器 */
+.lightbox-buttons {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
 /* 收藏按钮 */
 .favorite-btn {
-    position: absolute;
-    bottom: 30px;
     padding: 10px 20px;
     background-color: #222222;
     color: white;
@@ -228,7 +238,36 @@ nav ul li a:hover {
 
 .favorite-btn.added {
     background-color: #2ed573;
-    content: "✔ 已收藏";
+}
+
+/* 分享按钮 */
+.share-btn {
+    padding: 10px 20px;
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.share-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 下载按钮 */
+.download-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    background-color: #218838;
 }
 
 /* 移除按钮 */
